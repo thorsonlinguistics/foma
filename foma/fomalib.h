@@ -268,6 +268,7 @@ FEXPORT struct fsm *fsm_mark_fsm_tail(struct fsm *net, struct fsm *marker);
 FEXPORT struct fsm *fsm_add_loop(struct fsm *net, struct fsm *marker, int finals);
 FEXPORT struct fsm *fsm_add_sink(struct fsm *net, int final);
 FEXPORT struct fsm *fsm_left_rewr(struct fsm *net, struct fsm *rewr);
+FEXPORT struct fsm *fsm_iterate(struct fsm *net, struct fsm *epsilon);
 FEXPORT struct fsm *fsm_flatten(struct fsm *net, struct fsm *epsilon);
 FEXPORT struct fsm *fsm_unflatten(struct fsm *net, char *epsilon_sym, char *repeat_sym);   
 FEXPORT struct fsm *fsm_close_sigma(struct fsm *net, int mode);

@@ -3079,6 +3079,32 @@ struct fsm *fsm_context_restrict(struct fsm *X, struct fsmcontexts *LR) {
     return(Result);
 }
 
+struct fsm *fsm_iterate(struct fsm *net, struct fsm *counter) {
+    struct fsm_read_handle *count;
+    char* countstring;
+    int n;
+
+    count = fsm_read_init(counter);
+    if (fsm_get_next_arc(count) == -1) {
+        fsm_destroy(net);
+        fsm_destroy(count);
+        return NULL;
+    }
+    countstring = strdup(fsm_get_arc_in(count));
+    fsm_read_done(count);
+    fsm_destroy(counter);
+
+    n = atoi(countstring);
+    if (n == 0) {
+        fsm_destroy(net);
+        fsm_destroy(count);
+        return NULL;
+    }
+
+    xxfree(countstring);
+    return fsm_concat_n(net, n);
+}
+
 struct fsm *fsm_flatten(struct fsm *net, struct fsm *epsilon) {
     struct fsm *newnet;
     struct fsm_construct_handle *outh;
