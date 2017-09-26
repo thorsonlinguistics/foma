@@ -75,6 +75,7 @@ foma_fsm_equivalent.restype = c_int
 foma_fsm_isempty = foma.fsm_isempty
 foma_fsm_isempty.restype = c_int
 foma_fsm_flatten = foma.fsm_flatten
+foma_fsm_iterate = foma.fsm_iterate
 foma_fsm_flatten.restype = POINTER(FSTstruct)
 foma_apply_set_space_symbol = foma.apply_set_space_symbol
 foma_fsm_read_binary_file = foma.fsm_read_binary_file

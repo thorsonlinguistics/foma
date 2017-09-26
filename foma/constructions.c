@@ -3087,7 +3087,7 @@ struct fsm *fsm_iterate(struct fsm *net, struct fsm *counter) {
     count = fsm_read_init(counter);
     if (fsm_get_next_arc(count) == -1) {
         fsm_destroy(net);
-        fsm_destroy(count);
+        fsm_read_done(count);
         return NULL;
     }
     countstring = strdup(fsm_get_arc_in(count));
@@ -3095,11 +3095,6 @@ struct fsm *fsm_iterate(struct fsm *net, struct fsm *counter) {
     fsm_destroy(counter);
 
     n = atoi(countstring);
-    if (n == 0) {
-        fsm_destroy(net);
-        fsm_destroy(count);
-        return NULL;
-    }
 
     xxfree(countstring);
     return fsm_concat_n(net, n);
