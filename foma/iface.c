@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
@@ -25,6 +26,10 @@
 
 #include "foma.h"
 #include "zlib.h"
+
+#if (__STDC_VERSION__ >= 199901L)
+#include <stdint.h>
+#endif
 
 extern int g_show_flags;
 extern int g_obey_flags;
@@ -823,7 +828,8 @@ void iface_apply_random(char *(*applyer)(), int limit) {
         }
 	for (tempresults = results; tempresults - results < limit; tempresults++) {
 	    if (tempresults->string != NULL) {
-		printf("[%i] %s\n", tempresults->count, tempresults->string);
+		//printf("[%i] %s\n", tempresults->count, tempresults->string);
+		printf("[%i]\n%s\n", tempresults->count, tempresults->string);
 		xxfree(tempresults->string);
 	    }
 	}
@@ -1263,7 +1269,7 @@ void iface_words(int limit) {
             result = apply_words(ah);
             if (result == NULL)
                 break;
-            printf("%s\n",result);
+            printf("%s\n", result);
         }
         apply_reset_enumerator(ah);
     }
